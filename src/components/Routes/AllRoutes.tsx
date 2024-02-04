@@ -35,7 +35,7 @@ const AllRoutes = () => {
           path="/rewards"
           element={<UserPrivateRoute child={<Rewards />} />}
         />
-        {/* <Route path="/dashboard" element={<AdminPrivateRoute child={<Dashboard/>} />}/> */}
+        <Route path="*" element={<p>Page not found</p>} />
       </Routes>
     </div>
   );
