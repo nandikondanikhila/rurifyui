@@ -141,6 +141,7 @@ const Issues = () => {
                 alt={el?.description}
                 className="w-full h-40 object-cover mb-4"
               />
+              <p className="text-slate-700">Location: {el?.location}</p>
               <p className="text-base text-slate-600">{el?.description}</p>
               <p className="text-lg font-medium">
                 Issue:{" "}
