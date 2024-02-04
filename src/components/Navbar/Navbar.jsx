@@ -28,7 +28,7 @@ const Navbar = () => {
         <div className="md:hidden w-9 text-2xl font-bold group relative">
           <FiAlignJustify className="cursor-pointer" />
 
-          <div className="hidden group-hover:block absolute w-40 right-0 top-6 border rounded py-3">
+          <div className="z-50 bg-white hidden group-hover:block absolute w-40 right-0 top-6 border rounded py-3">
             <ul>
               <Link to="/user-login">
                 <li className="text-base hover:bg-gray-200 px-3 font-medium text-[#2a5738]">

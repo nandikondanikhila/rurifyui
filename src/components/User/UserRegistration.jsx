@@ -96,7 +96,7 @@ const UserRegistration = () => {
                 <input
                   className="px-2 focus:outline-none border h-10 rounded w-full"
                   type="text"
-                  placeholder="Name"
+                  placeholder="Village"
                   onChange={handleUserData}
                   required
                   name="village"
