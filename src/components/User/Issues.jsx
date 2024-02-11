@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 const Issues = () => {
   const [image, setImage] = useState({});
   const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,58 +15,12 @@ const Issues = () => {
     setIsModalOpen(false);
   };
 
-  const handleGetLocation = () => {
-    return new Promise((resolve, reject) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          async (position) => {
-            const { latitude, longitude } = position.coords;
-            try {
-              const locationInfo = await fetchLocatoin(latitude, longitude);
-              resolve(locationInfo);
-            } catch (error) {
-              notify("Error fetching location:", error.message);
-              console.error("Error fetching location:", error.message);
-              reject(error);
-            }
-          },
-          (error) => {
-            notify("Error getting geolocation:", error.message);
-            console.error("Error getting geolocation:", error.message);
-            reject(error);
-          }
-        );
-      } else {
-        notify("Geolocation is not supported by this browser.");
-        console.error("Geolocation is not supported by this browser.");
-        reject(new Error("Geolocation is not supported"));
-      }
-    });
-  };
-
-  const fetchLocatoin = async (latitude, longitude) => {
-    try {
-      const apiKey = import.meta.env.VITE_OPENCAGE_API_KEY;
-      const response = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`
-      );
-
-      const { results } = response.data;
-      if (results.length > 0) {
-        return results[0].formatted;
-      }
-    } catch (error) {
-      console.error("Error fetching location details:", error);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     const imgUrl = await handleUploadImage();
     try {
       const url = `${import.meta.env.VITE_SERVER_URL}/issues/new`;
-      const location = await handleGetLocation();
       const body = { img: imgUrl, description, location };
       await axios.post(url, body, { withCredentials: true });
       notify("Issue uploaded successfully");
@@ -104,7 +59,7 @@ const Issues = () => {
   const getIssues = async () => {
     try {
       const url = `${import.meta.env.VITE_SERVER_URL}/issues`;
-      const response = await axios.get(url,{withCredentials:true});
+      const response = await axios.get(url, { withCredentials: true });
       setIssues(response.data.data);
     } catch (err) {
       console.log(err);
@@ -151,7 +106,11 @@ const Issues = () => {
                   <span className="text-slate-600">Not Approved</span>
                 )}
               </p>
-              {el?.volunteer && <p className="text-base font-medium">Volunteer : {el?.volunteer}</p>}
+              {el?.volunteer && (
+                <p className="text-base font-medium">
+                  Volunteer : {el?.volunteer}
+                </p>
+              )}
               {el?.rewards && <p className="text-sm">Rewards: {el?.rewards}</p>}
             </div>
           ))}
@@ -170,6 +129,15 @@ const Issues = () => {
               accept="image/*"
               required
               onChange={handleChange}
+            />
+            <p className="">Location</p>
+            <textarea
+              rows={2}
+              className="border border-black rounded focus:outline-none p-2"
+              name="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
             />
 
             <p className="">Description</p>
