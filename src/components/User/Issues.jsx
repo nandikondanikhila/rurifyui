@@ -37,10 +37,10 @@ const Issues = () => {
     try {
       const formData = new FormData();
       formData.append("file", image);
-      formData.append("upload_preset", "qybuoava");
+      formData.append("upload_preset", "rlc9tkbi");
 
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dnqcxtdsy/image/upload",
+        "https://api.cloudinary.com/v1_1/dekrbgl4u/image/upload",
         formData
       );
       return response.data.url;
