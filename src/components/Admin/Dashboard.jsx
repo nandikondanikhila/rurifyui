@@ -43,7 +43,7 @@ const Dashboard = () => {
       <AuthNavbar />
 
       <div>
-        <table className="w-full my-10">
+        <table className="w-full my-10 overflow-auto">
           <thead>
             <tr>
               <th className="px-2 py-3 text-left border-b border-gray-200 bg-gray-100 whitespace-nowrap">
@@ -54,6 +54,9 @@ const Dashboard = () => {
               </th>
               <th className="px-2 py-3 text-left border-b border-gray-200 bg-gray-100 whitespace-nowrap">
                 Phone
+              </th>
+              <th className="px-2 py-3 text-left border-b border-gray-200 bg-gray-100 whitespace-nowrap">
+                Aadhar
               </th>
               <th className="px-2 py-3 text-left border-b border-gray-200 bg-gray-100 whitespace-nowrap">
                 Village
@@ -78,6 +81,9 @@ const Dashboard = () => {
                   </td>
                   <td className="px-2 py-4 border-b border-gray-200">
                     {el?.phone}
+                  </td>
+                  <td className="px-2 py-4 border-b border-gray-200">
+                    {el?.aadhar}
                   </td>
                   <td className="px-2 py-4 border-b border-gray-200">
                     {el?.village}
