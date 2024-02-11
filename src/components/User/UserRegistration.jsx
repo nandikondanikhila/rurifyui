@@ -80,11 +80,25 @@ const UserRegistration = () => {
                 <br />
                 <input
                   className="px-2 focus:outline-none border h-10 rounded w-full"
-                  type="text"
+                  type="number"
                   placeholder="Phone"
                   onChange={handleUserData}
                   required
                   name="phone"
+                />
+              </div>
+              <div>
+                <label className="font-semibold py-2 text-gray-700">
+                  Aadhar No
+                </label>
+                <br />
+                <input
+                  className="px-2 focus:outline-none border h-10 rounded w-full"
+                  type="number"
+                  placeholder="Aadhar"
+                  onChange={handleUserData}
+                  required
+                  name="aadhar"
                 />
               </div>
 
